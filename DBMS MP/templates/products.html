@@ -1,0 +1,72 @@
+{% extends "header.html" %}
+{% block real_content %}
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+<br>
+<h4 align="center"> PRODUCTS </h4><br>
+<div class="container">
+  <div class="row">
+    {% for i in hj %}
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="card mb-3 shadow-lg" style="max-width: 18rem;">
+        <h4 class="card-header bg-transparent">{{i.pname}}</h4>
+        <img src="static/images/{{i.pimg}}" style="height:200px;"  class="card-img-top" alt="Coming Soon">
+        <div class="card-body ">
+          <h5>Cost:</h5>
+          {% if customer_info %}
+            {% if customer_info[0]['subsidy'] == '1' %}
+                <p class="card-text">INR{{i.scost}}</p>
+            {% else %}
+                <p class="card-text">INR{{i.ncost}}</p>
+            {% endif %}
+          {% else %}
+                <p class="card-text"> INR {{i.ncost}}</p>
+          {% endif %}
+          <form action="order_placed" method="post">
+            <h5>Quantity:</h5>
+            <select class="form-control" name="quantity" id="exampleFormControlSelect2">
+              <option value='1'>1</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
+              <option value='4'>4</option>
+              <option value='5'>5</option>
+            </select><br>
+          <h5>Description:</h5>
+          <!-- <p class="card-text">{{i.scost}}</p> -->
+            {% for k in i.description %}
+            <p class="card-text">
+                {{k}}
+              </p>
+            {% endfor %}
+        </div>
+          {% if customer_info %}
+          <div class="card-footer bg-transparent border-success">
+          <form action="order_placed" method="post">
+            <input type="hidden" name="pid" value="{{i.pid}}" />
+            <input type="hidden" name="cid" value="{{name}}" />
+              {% if customer_info[0]['subsidy'] == '1' %}
+                <input type="hidden" name="cost" value="{{i.scost}}" />
+              {% else %}
+                <input type="hidden" name="cost" value="{{i.ncost}}" />
+              {% endif %}
+              <button type="submit" class="btn btn-dark"> Buy Now </button>
+          </form>
+          </div>
+          {% else %}
+            <div class="card-footer bg-transparent border-success"><a type="button" class="btn btn-dark" href="/pleaselogin"> Buy Now </a></div>
+          {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

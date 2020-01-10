@@ -1,0 +1,76 @@
+{% extends "header.html" %}
+{% block real_content %}
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+
+  <!-- image_one = request.files['col_one']
+
+
+  file_name1 = secure_filename(image_one.filename)
+  filename1 = secure_filename(image_one.filename)
+  image_one.save(os.path.join('./static/images/',filename1))
+
+  thr1 = '/static/images/'+filename1
+
+  data = [thr1]
+  ROOT = path.dirname(path.realpath(__file__))
+  db = sqlite3.connect(path.join(ROOT, "main.sqlite"))
+  db.execute('''insert into gallery(img_src) values(?) ''',data)
+  db.commit() -->
+
+{% if customer_info[0]['subsidy'] == '1' %}
+  <br><br><h1>You already have subsidy</h1>
+{% else %}
+<br><h1 align="center"> Subsidy Application</h1><br><br><br>
+<div class="container">
+  <form enctype ="multipart/form-data" action="sub_ap" method="post">
+    <div class="form-group row">
+      <label for="namef" class="col-sm-2 col-form-label">Name</label>
+      <div class="col" id="namef">
+        <input class="form-control" name="name" type="text" placeholder="{{customer_info[0]['nam']}}" readonly>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input class="form-control" name="email" type="text" placeholder="{{customer_info[0]['email']}}" readonly>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Annual Income</label>
+      <div class="col-sm-10">
+        <input class="text" name="ainc" type="text" placeholder="INR">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="addrprf1" class="col-sm-2 col-form-label">Address Proof</label>
+      <div class="col-sm-10">
+        <input type="file" name="adpf" class="form-control-file">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="addrprf2" class="col-sm-2 col-form-label">Income Certificate</label>
+      <div class="col-sm-10">
+        <input type="file" name="income" class="form-control-file">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-dark">Apply</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endif %}
+</body>
+</html>
+{% endblock %}

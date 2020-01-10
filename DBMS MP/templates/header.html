@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#"><img src="static/images/ealg.png" style="height:50px;width:50px"></a>
+  <a class="navbar-brand" href="#">EasyAgriculture</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/products">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/mlogin">Admin Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/apply">Subsidy</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalLong">Login</a>
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="login_add" method="post">
+          Email id:<br>
+          <input placeholder="Email" type="text" name="email">
+          <br>
+          password:<br>
+          <input placeholder="Password" type="password" name="password">
+          <br><br>
+          <button type="submit" class="btn btn-dark">Submit</button>
+      </form>
+      <!-- </li>
+    </ul> -->
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button> -->
+        <a href="/register"><button type="button" class="btn btn-dark">New User? Register</button></a>
+      </div>
+      </div>
+
+      {% if customer_info %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Hi {{customer_info[0]['nam']}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/orders">Orders</a>
+          <a class="dropdown-item" href="/account">My Account</a>
+          <a class="dropdown-item" href="#">
+          <form action="dropsession">
+            <button class="dropdown-item" type="submit" href="#">Logout</button>
+          </form>
+          </a>
+      </li>
+      {% else %}
+        <li class="nav-item">
+        <a class="nav-link" href="#">Hello! Guest</a>
+      </li>
+      {% endif %}
+</nav>
+<style>
+  </style>
+{% block real_content %}
+
+{% endblock %}
+<footer class="footer bg-dark" style="padding:8px;">
+  <div class="container">
+    <span class="text-muted">Developed by Anurag V S(1RN16CS012) and Shreyas M(1RN17CS419)</span>
+  </div>
+</footer>

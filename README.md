@@ -6,5 +6,5 @@ Database schema is in dbms dia.png
 
 
 
-Create a procedure 'new_procedure' to select everything from Customer where cid= given cid
+Create a procedure 'new_procedure' to select everything from Customer where cid= given cid.
 In table orders tcost=quantity*cost
